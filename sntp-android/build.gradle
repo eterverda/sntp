@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'maven-publish'
 
 android {
     compileSdkVersion 22
@@ -21,4 +22,24 @@ android {
 dependencies {
     compile project(':sntp')
     compile 'com.android.support:support-annotations:22.2.0'
+}
+
+publishing {
+    publications {
+        sntpAndroid(MavenPublication) {
+            pom.withXml {
+                def dep = asNode().appendNode('dependencies').appendNode('dependency')
+                dep.appendNode('groupId', project(':sntp').group)
+                dep.appendNode('artifactId', project(':sntp').name)
+                dep.appendNode('version', project(':sntp').version)
+                dep.appendNode('scope', 'compile')
+            }
+            artifact bundleRelease
+        }
+    }
+    repositories {
+        maven {
+            url new File(rootProject.rootDir, 'm2/repository')
+        }
+    }
 }

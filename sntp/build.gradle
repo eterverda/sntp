@@ -1,1 +1,15 @@
 apply plugin: 'java'
+apply plugin: 'maven-publish'
+
+publishing {
+    publications {
+        sntp(MavenPublication) {
+            from components.java
+        }
+    }
+    repositories {
+        maven {
+            url new File(rootProject.rootDir, 'm2/repository')
+        }
+    }
+}
