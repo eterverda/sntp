@@ -17,7 +17,7 @@ In your `build.gradle`:
         maven { url 'https://raw.githubusercontent.com/eterverda/sntp/m2/' }
     }
     dependencies {
-        compile 'io.github.eterverda.sntp:sntp-android:0.1.4'
+        compile 'io.github.eterverda.sntp:sntp-android:0.1.5'
     }
 
 In `onCreate` of your application:
@@ -48,7 +48,7 @@ In `build.gradle` of your Java project:
     }
 
     dependencies {
-        compile 'io.github.eterverda.sntp:sntp:0.1.4'
+        compile 'io.github.eterverda.sntp:sntp:0.1.5'
     }
 
 Somehere on startup of application:
