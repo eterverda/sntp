@@ -25,22 +25,46 @@ public final class SNTPResponse {
         this.clockOffset = clockOffset;
     }
 
+    /**
+     * @return response time on local clock useful for caching purposes
+     */
     public long getResponseTimeMillis() {
         return responseTimeMillis;
     }
 
+    /**
+     * Difference between local clock and world clock. Positive values mean local clock is behind.
+     * Negative values mean local clock is ahead world clock.
+     * <p/>
+     * To get global (world) time you need to call {@code System.currentTimeMillis() + clockOffset}
+     *
+     * @return world clock offset
+     * @see #globalTimeMillis(long)
+     * @see #currentGlobalTimeMillis()
+     */
     public long getClockOffset() {
         return clockOffset;
     }
 
+    /**
+     * @return {@code localTimeMillis + clockOffset}
+     * @see #getClockOffset()
+     */
     public long globalTimeMillis(long localTimeMillis) {
         return localTimeMillis + clockOffset;
     }
 
+    /**
+     * @return current time on word clock
+     * @see #getClockOffset()
+     */
     public long currentGlobalTimeMillis() {
         return globalTimeMillis(System.currentTimeMillis());
     }
 
+    /**
+     * Serializes response for {@link #unflattenFromString(String)}
+     */
     public String flattenToString() {
         final long sys = getResponseTimeMillis();
         final long ntp = globalTimeMillis(sys);
@@ -52,15 +76,23 @@ public final class SNTPResponse {
         return String.format(Locale.US, FORMAT, sysStr, ntpStr, off);
     }
 
+    /**
+     * Serializes timestamp for {@link #unflattenTimestampFromString(String)}
+     */
     public static String flattenTimestampToString(long timeMillis) {
         return DATE_FORMAT.format(new Date(timeMillis));
     }
 
-    public static SNTPResponse unflattenFromString(String line) throws ParseException {
-        final Matcher matcher = PATTERN.matcher(line);
+    /**
+     * Parses response serialized by {@link #flattenToString()}
+     *
+     * @throws ParseException when gievn string is malformed
+     */
+    public static SNTPResponse unflattenFromString(String string) throws ParseException {
+        final Matcher matcher = PATTERN.matcher(string);
 
         if (!matcher.matches()) {
-            throw new ParseException("malformed input " + line, 0);
+            throw new ParseException("malformed input " + string, 0);
         }
 
         final String sysStr = matcher.group(1);
@@ -72,17 +104,22 @@ public final class SNTPResponse {
         return create(sys, ntp);
     }
 
-    public static long unflattenTimestampFromString(String sysStr) throws ParseException {
-        return DATE_FORMAT.parse(sysStr).getTime();
+    /**
+     * Parses timestamp rerialized by {@link #flattenTimestampToString(long)}
+     *
+     * @throws ParseException when gievn string is malformed
+     */
+    public static long unflattenTimestampFromString(String string) throws ParseException {
+        return DATE_FORMAT.parse(string).getTime();
     }
 
-    public static SNTPResponse create(long localTimeMillis, long globalTimeMillis) {
+    static SNTPResponse create(long localTimeMillis, long globalTimeMillis) {
         final long clockOffset = globalTimeMillis - localTimeMillis;
 
         return new SNTPResponse(localTimeMillis, clockOffset);
     }
 
-    public static SNTPResponse create(long originateTimeMillis, long receiveTimeMillis, long transmitTimeMillis, long responseTimeMillis) {
+    static SNTPResponse create(long originateTimeMillis, long receiveTimeMillis, long transmitTimeMillis, long responseTimeMillis) {
         final long clockOffset = ((receiveTimeMillis - originateTimeMillis) + (transmitTimeMillis - responseTimeMillis)) / 2;
 
         return new SNTPResponse(responseTimeMillis, clockOffset);

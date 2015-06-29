@@ -13,6 +13,9 @@ public class AndroidSNTPCacheFactory {
                 .build();
     }
 
+    /**
+     * @see {Context#getCacheDir()}
+     */
     public static SNTPCacheBuilder custom(Context context) {
         return SNTPCacheBuilder.custom()
                 .setFile(new File(context.getCacheDir(), "sntp/cache"));

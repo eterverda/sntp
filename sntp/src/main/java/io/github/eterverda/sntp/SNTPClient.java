@@ -5,6 +5,9 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 
+/**
+ * @see SNTPClientBuilder
+ */
 public final class SNTPClient {
     // all time calculations in seconds
     private static final long DAYS = 24L * 60L * 60L;
@@ -31,8 +34,15 @@ public final class SNTPClient {
         this.clock = clock;
     }
 
+    /**
+     * Executes SNTP response to {@link SNTPHosts#nextHost()} and returns result.
+     *
+     * @return response from SNTP server
+     * @throws IOException if IO Error occurs
+     */
     public SNTPResponse execute() throws IOException {
-        final InetAddress address = InetAddress.getByName(hosts.nextHost());
+        final String host = hosts.nextHost();
+        final InetAddress address = InetAddress.getByName(host);
 
         final DatagramSocket socket = new DatagramSocket();
         try {
