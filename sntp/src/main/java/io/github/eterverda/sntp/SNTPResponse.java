@@ -54,16 +54,20 @@ public final class SNTPResponse {
         final Matcher matcher = PATTERN.matcher(line);
 
         if (!matcher.matches()) {
-            throw new ParseException("malformed parse " + line, 0);
+            throw new ParseException("malformed input " + line, 0);
         }
 
         final String sysStr = matcher.group(1);
         final String ntpStr = matcher.group(2);
 
-        final long sys = DATE_FORMAT.parse(sysStr).getTime();
-        final long ntp = DATE_FORMAT.parse(ntpStr).getTime();
+        final long sys = unflattenTimestampFromString(sysStr);
+        final long ntp = unflattenTimestampFromString(ntpStr);
 
         return create(sys, ntp);
+    }
+
+    public static long unflattenTimestampFromString(String sysStr) throws ParseException {
+        return DATE_FORMAT.parse(sysStr).getTime();
     }
 
     public static SNTPResponse create(long localTimeMillis, long globalTimeMillis) {
