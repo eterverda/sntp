@@ -6,18 +6,6 @@ final class MemorySNTPCache implements SNTPCache {
     private final SNTPCache delegate;
     private SNTPResponse response;
 
-    public MemorySNTPCache() {
-        this(null, null);
-    }
-
-    public MemorySNTPCache(SNTPResponse initialResponse) {
-        this(null, initialResponse);
-    }
-
-    public MemorySNTPCache(SNTPCache delegate) {
-        this.delegate = delegate;
-    }
-
     public MemorySNTPCache(SNTPCache delegate, SNTPResponse initialResponse) {
         this.delegate = delegate;
         this.response = initialResponse;
