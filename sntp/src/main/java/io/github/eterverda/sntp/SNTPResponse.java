@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.TimeZone;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -11,6 +12,11 @@ public final class SNTPResponse {
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.US);
     private static final Pattern PATTERN = Pattern.compile("sys ([^\\s]+) ntp ([^\\s]+) off [^\\s]+");
     private static final String FORMAT = "sys %s ntp %s off %d";
+
+    static {
+        DATE_FORMAT.setTimeZone(TimeZone.getTimeZone("GMT"));
+    }
+
     private final long responseTimeMillis;
     private final long clockOffset;
 
