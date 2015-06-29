@@ -25,9 +25,9 @@ public final class SNTPClient {
 
     private final SNTPHosts hosts;
     private final int timeout;
-    private final MonotinicClock clock;
+    private final MonotonicClock clock;
 
-    SNTPClient(SNTPHosts hosts, int timeout, MonotinicClock clock) {
+    SNTPClient(SNTPHosts hosts, int timeout, MonotonicClock clock) {
         this.hosts = hosts != null ? hosts : SNTPHosts.GLOBAL;
         this.timeout = timeout;
         this.clock = clock;
@@ -122,7 +122,7 @@ public final class SNTPClient {
         buf[off + 3] = (byte) val;
     }
 
-    public interface MonotinicClock {
+    public interface MonotonicClock {
         long ticks();
     }
 }

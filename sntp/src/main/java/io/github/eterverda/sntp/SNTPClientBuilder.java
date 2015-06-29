@@ -3,7 +3,7 @@ package io.github.eterverda.sntp;
 public final class SNTPClientBuilder {
     private int timeout = SNTPClient.DEFAULT_SOCKET_TIMEOUT;
     private SNTPHosts hosts = SNTPHosts.GLOBAL;
-    private SNTPClient.MonotinicClock clock;
+    private SNTPClient.MonotonicClock clock;
 
     private SNTPClientBuilder() {
     }
@@ -16,7 +16,7 @@ public final class SNTPClientBuilder {
         return new SNTPClientBuilder();
     }
 
-    public SNTPClientBuilder setMonotonicClock(SNTPClient.MonotinicClock clock) {
+    public SNTPClientBuilder setMonotonicClock(SNTPClient.MonotonicClock clock) {
         this.clock = clock;
         return this;
     }

@@ -6,7 +6,7 @@ import io.github.eterverda.sntp.SNTPClient;
 import io.github.eterverda.sntp.SNTPClientBuilder;
 
 public class AndroidSNTPClientFactory {
-    public static final SNTPClient.MonotinicClock ANDROID_SYSTEM_CLOCK = new AndroidSystemClock();
+    public static final SNTPClient.MonotonicClock ANDROID_SYSTEM_CLOCK = new AndroidSystemClock();
 
     public static SNTPClient create() {
         return custom().build();
@@ -17,7 +17,7 @@ public class AndroidSNTPClientFactory {
                 .setMonotonicClock(ANDROID_SYSTEM_CLOCK);
     }
 
-    static final class AndroidSystemClock implements SNTPClient.MonotinicClock {
+    static final class AndroidSystemClock implements SNTPClient.MonotonicClock {
         AndroidSystemClock() {
         }
 
