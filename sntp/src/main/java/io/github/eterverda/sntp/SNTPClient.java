@@ -6,8 +6,6 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 
 public final class SNTPClient {
-    public static final int DEFAULT_SOCKET_TIMEOUT = 4_000;
-
     // all time calculations in seconds
     private static final long DAYS = 24L * 60L * 60L;
     private static final long YEARS = 365L * DAYS;

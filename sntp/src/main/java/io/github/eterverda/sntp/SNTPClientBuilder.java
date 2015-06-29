@@ -1,7 +1,9 @@
 package io.github.eterverda.sntp;
 
 public final class SNTPClientBuilder {
-    private int timeout = SNTPClient.DEFAULT_SOCKET_TIMEOUT;
+    public static final int DEFAULT_SOCKET_TIMEOUT = 4_000;
+
+    private int timeout = DEFAULT_SOCKET_TIMEOUT;
     private SNTPHosts hosts = SNTPHosts.GLOBAL;
     private SNTPClient.MonotonicClock clock;
 
