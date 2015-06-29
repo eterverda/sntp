@@ -4,5 +4,9 @@
 
     <uses-permission android:name="android.permission.INTERNET"/>
 
-    <application/>
+    <application>
+        <service
+            android:name=".SNTPService"
+            android:exported="false"/>
+    </application>
 </manifest>
