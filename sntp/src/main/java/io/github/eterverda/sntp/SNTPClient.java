@@ -28,7 +28,7 @@ public final class SNTPClient {
     private final MonotonicClock clock;
 
     SNTPClient(SNTPHosts hosts, int timeout, MonotonicClock clock) {
-        this.hosts = hosts != null ? hosts : SNTPHosts.GLOBAL;
+        this.hosts = hosts;
         this.timeout = timeout;
         this.clock = clock;
     }
