@@ -2,8 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.time">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-
     <application
         android:name="io.github.eterverda.sntp.android.SNTPApplication"
         android:allowBackup="true">
