@@ -24,6 +24,11 @@ dependencies {
     compile 'com.android.support:support-annotations:22.2.0'
 }
 
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier 'sources'
+}
+
 publishing {
     publications {
         sntpAndroid(MavenPublication) {
@@ -35,6 +40,7 @@ publishing {
                 dep.appendNode('scope', 'compile')
             }
             artifact bundleRelease
+            artifact sourcesJar
         }
     }
     repositories {
