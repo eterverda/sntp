@@ -24,11 +24,12 @@ public final class SNTPClient {
     private static final int NTP_PORT = 123;
 
     private final SNTPHosts hosts;
-    private final int timeout = DEFAULT_SOCKET_TIMEOUT;
+    private final int timeout;
     private final MonotinicClock clock;
 
     SNTPClient(SNTPHosts hosts, int timeout, MonotinicClock clock) {
         this.hosts = hosts != null ? hosts : SNTPHosts.GLOBAL;
+        this.timeout = timeout;
         this.clock = clock;
     }
 
