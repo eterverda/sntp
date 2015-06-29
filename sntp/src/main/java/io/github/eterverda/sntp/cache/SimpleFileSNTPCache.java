@@ -31,12 +31,11 @@ final class SimpleFileSNTPCache implements SNTPCache {
         if (!file.exists()) {
             throw new IOException("file " + file + " does not exist");
         }
+
+        final String line = readLine(file);
+
         try {
-            final BufferedReader reader = new BufferedReader(new FileReader(file));
-            final String line = reader.readLine();
-
             return SNTPResponse.unflattenFromString(line);
-
         } catch (ParseException e) {
             if (!file.delete()) {
                 throw new IOException("cannot delete malformed file " + file, e);
@@ -45,16 +44,25 @@ final class SimpleFileSNTPCache implements SNTPCache {
         }
     }
 
+    @SuppressWarnings("TryFinallyCanBeTryWithResources")
+    private static String readLine(File file) throws IOException {
+        final BufferedReader in = new BufferedReader(new FileReader(file));
+        try {
+            return in.readLine();
+        } finally {
+            in.close();
+        }
+    }
+
     @Override
     public void put(SNTPResponse response) {
         try {
-            write(response, file);
+            write(file, response);
         } catch (IOException ignore) {
         }
     }
 
-    @SuppressWarnings("TryFinallyCanBeTryWithResources")
-    public static void write(SNTPResponse response, File file) throws IOException {
+    public static void write(File file, SNTPResponse response) throws IOException {
         if (response == null) {
             if (!file.delete()) {
                 throw new IOException("cannot delete file " + file);
@@ -62,8 +70,13 @@ final class SimpleFileSNTPCache implements SNTPCache {
             return;
         }
 
-        final String string = response.flattenToString();
+        final String line = response.flattenToString();
 
+        writeLine(file, line);
+    }
+
+    @SuppressWarnings("TryFinallyCanBeTryWithResources")
+    public static void writeLine(File file, String string) throws IOException {
         final File dir = file.getParentFile();
         if (!dir.mkdirs()) {
             throw new IOException("cannot make directory " + dir);
@@ -76,5 +89,4 @@ final class SimpleFileSNTPCache implements SNTPCache {
             out.close();
         }
     }
-
 }
