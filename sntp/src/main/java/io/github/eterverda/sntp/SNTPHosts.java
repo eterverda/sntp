@@ -13,7 +13,7 @@ public final class SNTPHosts {
     public static final SNTPHosts RU = new SNTPHosts(true, "0.ru.pool.ntp.org", "1.ru.pool.ntp.org", "2.ru.pool.ntp.org", "3.ru.pool.ntp.org");
 
     private final String[] hosts;
-    private int index;
+    private transient int index;
 
     public SNTPHosts(String host) {
         if (host == null) {
@@ -49,5 +49,19 @@ public final class SNTPHosts {
             index = 0;
         }
         return hosts[index++];
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other instanceof SNTPHosts && equals((SNTPHosts) other);
+    }
+
+    public boolean equals(SNTPHosts other) {
+        return other == this || Arrays.equals(hosts, other.hosts);
+    }
+
+    @Override
+    public int hashCode() {
+        return Arrays.hashCode(hosts);
     }
 }
