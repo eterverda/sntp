@@ -108,6 +108,23 @@ public final class SNTP {
     }
 
     /**
+     * Same as {@link #currentTimeMillisFromCache()} but never throws. Will fallback to
+     * {@link System#currentTimeMillis()}.
+     *
+     * @return current time on world (or maybe local) clock
+     */
+    public static long safeCurrentTimeMillisFromCache() {
+        final SNTPCache cache = CACHE.get();
+        if (cache != null) {
+            final SNTPResponse response = cache.get();
+            if (response != null) {
+                return response.currentGlobalTimeMillis();
+            }
+        }
+        return System.currentTimeMillis();
+    }
+
+    /**
      * This method will try to calculate current time on global clock using {@link SNTPCache} provided
      * to {@link #setCache(SNTPCache)}. If there is no cache or cache empty or expired network request will be
      * performed. Response from network is subject for caching.
