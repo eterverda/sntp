@@ -167,6 +167,9 @@ public final class SNTP {
         if (client != null) {
             try {
                 final SNTPResponse response = client.execute();
+                if (cache != null) {
+                    cache.put(response);
+                }
                 return response.currentGlobalTimeMillis();
             } catch (IOException ignore) {
             }
