@@ -15,4 +15,8 @@ buildscript {
 allprojects {
     group 'io.github.eterverda.sntp'
     version '0.1.7'
+
+    repositories {
+        jcenter()
+    }
 }

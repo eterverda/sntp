@@ -1,11 +1,11 @@
 package io.github.eterverda.sntp.cache;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.text.ParseException;
 
 import io.github.eterverda.sntp.SNTPResponse;
@@ -32,10 +32,10 @@ final class SimpleFileSNTPCache implements SNTPCache {
             throw new IOException("file " + file + " does not exist");
         }
 
-        final String line = readLine(file);
+        final String string = readString(file);
 
         try {
-            return SNTPResponse.unflattenFromString(line);
+            return SNTPResponse.unflattenFromString(string);
         } catch (ParseException e) {
             if (!file.delete()) {
                 throw new IOException("cannot delete malformed file " + file, e);
@@ -45,10 +45,15 @@ final class SimpleFileSNTPCache implements SNTPCache {
     }
 
     @SuppressWarnings("TryFinallyCanBeTryWithResources")
-    private static String readLine(File file) throws IOException {
+    private static String readString(File file) throws IOException {
         final BufferedReader in = new BufferedReader(new FileReader(file));
         try {
-            return in.readLine();
+            final StringBuilder result = new StringBuilder(128); // should be enough for well-formed SNTPResponse
+            for(int i = in.read(); i >= 0; i = in.read()) {
+                final char c = (char) i;
+                result.append(c);
+            }
+            return result.toString();
         } finally {
             in.close();
         }
@@ -70,21 +75,22 @@ final class SimpleFileSNTPCache implements SNTPCache {
             return;
         }
 
-        final String line = response.flattenToString();
+        final String string = response.flattenToString();
 
-        writeLine(file, line);
+        writeString(file, string);
     }
 
     @SuppressWarnings("TryFinallyCanBeTryWithResources")
-    public static void writeLine(File file, String string) throws IOException {
+    private static void writeString(File file, String string) throws IOException {
         final File dir = file.getParentFile();
-        if (!dir.mkdirs()) {
+        if (!dir.exists() && !dir.mkdirs()) {
             throw new IOException("cannot make directory " + dir);
         }
 
-        final PrintWriter out = new PrintWriter(new FileWriter(file));
+        final BufferedWriter out = new BufferedWriter(new FileWriter(file));
         try {
-            out.println(string);
+            out.write(string);
+            out.flush();
         } finally {
             out.close();
         }
