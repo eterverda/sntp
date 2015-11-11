@@ -1,5 +1,6 @@
 package io.github.eterverda.sntp;
 
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -11,6 +12,7 @@ import java.util.regex.Pattern;
 public final class SNTPResponse {
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.US);
     private static final Pattern PATTERN = Pattern.compile("sys ([^\\s]+) ntp ([^\\s]+) off ([^\\s]+)");
+    private static final NumberFormat NUMBER_FORMAT = NumberFormat.getIntegerInstance(Locale.US);
     private static final String FORMAT = "sys %s ntp %s off %d";
 
     static {
@@ -101,7 +103,7 @@ public final class SNTPResponse {
 
         final long sys = unflattenTimestampFromString(sysStr);
         final long ntp = unflattenTimestampFromString(ntpStr);
-        final long off = Long.valueOf(offStr);
+        final long off = unflattenLongFromString(offStr);
 
         if (sys + off != ntp) {
             throw new ParseException("Suspicious offset: " + off, matcher.end(3));
@@ -117,6 +119,10 @@ public final class SNTPResponse {
      */
     public static long unflattenTimestampFromString(String string) throws ParseException {
         return DATE_FORMAT.parse(string).getTime();
+    }
+
+    private static long unflattenLongFromString(String string) throws ParseException {
+        return NUMBER_FORMAT.parse(string).longValue();
     }
 
     static SNTPResponse create(long localTimeMillis, long globalTimeMillis) {
