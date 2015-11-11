@@ -11,8 +11,8 @@ import java.util.regex.Pattern;
 
 public final class SNTPResponse {
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.US);
-    private static final Pattern PATTERN = Pattern.compile("sys ([^\\s]+) ntp ([^\\s]+) off ([^\\s]+)");
     private static final NumberFormat NUMBER_FORMAT = NumberFormat.getIntegerInstance(Locale.US);
+    private static final Pattern PATTERN = Pattern.compile("sys ([^\\s]+) ntp ([^\\s]+) off ([^\\s]+)");
     private static final String FORMAT = "sys %s ntp %s off %d";
 
     static {

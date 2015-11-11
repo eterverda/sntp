@@ -53,7 +53,7 @@ final class SimpleFileSNTPCache implements SNTPCache {
                 final char c = (char) i;
                 result.append(c);
             }
-            return result.toString();
+            return result.toString().trim();
         } finally {
             in.close();
         }
@@ -90,6 +90,7 @@ final class SimpleFileSNTPCache implements SNTPCache {
         final BufferedWriter out = new BufferedWriter(new FileWriter(file));
         try {
             out.write(string);
+            out.write('\n'); // some pretty printing
             out.flush();
         } finally {
             out.close();
