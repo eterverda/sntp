@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 
 public final class SNTPResponse {
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.US);
-    private static final Pattern PATTERN = Pattern.compile("sys ([^\\s]+) ntp ([^\\s]+) off [^\\s]+");
+    private static final Pattern PATTERN = Pattern.compile("sys ([^\\s]+) ntp ([^\\s]+) off ([^\\s]+)");
     private static final String FORMAT = "sys %s ntp %s off %d";
 
     static {
@@ -97,9 +97,15 @@ public final class SNTPResponse {
 
         final String sysStr = matcher.group(1);
         final String ntpStr = matcher.group(2);
+        final String offStr = matcher.group(3);
 
         final long sys = unflattenTimestampFromString(sysStr);
         final long ntp = unflattenTimestampFromString(ntpStr);
+        final long off = Long.valueOf(offStr);
+
+        if (sys + off != ntp) {
+            throw new ParseException("Suspicious offset: " + off, matcher.end(3));
+        }
 
         return create(sys, ntp);
     }
