@@ -64,6 +64,7 @@ public class SimpleFileSNTPCacheTest {
     public void testRead() throws IOException {
         final BufferedWriter writer = new BufferedWriter(new FileWriter(file));
         writer.write(WELL_FORMED_RESPONSE_STRING);
+        writer.write('\n');
         writer.close();
 
         final SNTPResponse response = cache.get();
