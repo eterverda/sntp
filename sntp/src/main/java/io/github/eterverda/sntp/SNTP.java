@@ -171,7 +171,7 @@ public final class SNTP {
                     cache.put(response);
                 }
                 return response.currentGlobalTimeMillis();
-            } catch (IOException ignore) {
+            } catch (IOException | SecurityException ignore) {
             }
         }
         return System.currentTimeMillis();
