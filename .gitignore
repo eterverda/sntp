@@ -6,3 +6,4 @@
 .DS_Store
 /build
 /m2
+*.iml
