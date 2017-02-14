@@ -72,6 +72,11 @@ public final class SNTPClient {
 
             return SNTPResponse.create(requestTime, receiveTime, transmitTime, responseTime);
 
+        } catch (AssertionError ass) {
+            // For reasons unknown AssertionError thrown on some Android 4 devices.
+            // Just coerce it to IOException.
+            throw new IOException(ass);
+
         } finally {
             try {
                 socket.close();
