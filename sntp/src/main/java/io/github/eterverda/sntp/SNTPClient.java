@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 /**
  * @see SNTPClientBuilder
@@ -71,6 +72,21 @@ public final class SNTPClient {
             final long transmitTime = readTimestamp(buffer, TRANSMIT_TIME_OFFSET);
 
             return SNTPResponse.create(requestTime, receiveTime, transmitTime, responseTime);
+
+        } catch (SecurityException sex) {
+            // Some shitty devices throw SecurityException caused by GaiException
+            // instead of throwing UnknownHostException.
+            // Here's our workaround of this issue.
+
+            final Throwable cause = sex.getCause();
+            if (cause == null) {
+                throw sex; // some other SecurityException, let it fall
+            }
+            final String causeName = cause.getClass().getName();
+            if (!causeName.equals("libcore.io.GaiException") && !causeName.equals("android.system.GaiException")) {
+                throw sex; // some other SecurityException, let it fall
+            }
+            throw new UnknownHostException();
 
         } catch (AssertionError ass) {
             // For reasons unknown AssertionError thrown on some Android 4 devices.
