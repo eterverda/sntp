@@ -1,0 +1,60 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "io.github.eterverda.sntp",
+    "module": "sntp",
+    "version": "0.2.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.4.2"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 7,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "files": [
+        {
+          "name": "sntp-0.2.0.jar",
+          "url": "sntp-0.2.0.jar",
+          "size": 16014,
+          "sha512": "14bad0b79b30c4a710ed8a498e848261958299132f24574c95a704a4adfc48549c77a27da1f79f16dd1683fca7a5d4d800cfcf065c1387d76610c68f56979ad7",
+          "sha256": "b08123927fd2a4cf3bf816b76809e897ad6d638cb0d378e8525a222d68889c26",
+          "sha1": "04c5d0872b2542cab654f64dd41456a001845829",
+          "md5": "0863c32ff147ad68fa892d650e9f80c9"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 7,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "sntp-0.2.0.jar",
+          "url": "sntp-0.2.0.jar",
+          "size": 16014,
+          "sha512": "14bad0b79b30c4a710ed8a498e848261958299132f24574c95a704a4adfc48549c77a27da1f79f16dd1683fca7a5d4d800cfcf065c1387d76610c68f56979ad7",
+          "sha256": "b08123927fd2a4cf3bf816b76809e897ad6d638cb0d378e8525a222d68889c26",
+          "sha1": "04c5d0872b2542cab654f64dd41456a001845829",
+          "md5": "0863c32ff147ad68fa892d650e9f80c9"
+        }
+      ]
+    }
+  ]
+}
