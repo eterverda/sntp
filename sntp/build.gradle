@@ -1,7 +1,7 @@
 apply plugin: 'java'
 apply plugin: 'maven-publish'
 
-compileJava {
+java {
     sourceCompatibility '1.7'
     targetCompatibility '1.7'
 }
@@ -27,5 +27,5 @@ publishing {
 }
 
 dependencies {
-    testCompile 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.13.2'
 }

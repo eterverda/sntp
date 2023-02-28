@@ -1,12 +1,10 @@
-<manifest
-    package="io.github.eterverda.sntp.android"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application>
         <service
             android:name=".SNTPService"
-            android:exported="false"/>
+            android:exported="false" />
     </application>
 </manifest>

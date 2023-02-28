@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.time">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <application
         android:name="io.github.eterverda.sntp.android.SNTPApplication"
-        android:allowBackup="true">
+        tools:ignore="MissingApplicationIcon">
+
         <activity
-            android:name=".MainActivity">
+            android:name=".MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -14,9 +16,11 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name="io.github.eterverda.sntp.android.SNTPResetCacheReceiver">
+        <receiver
+            android:name="io.github.eterverda.sntp.android.SNTPResetCacheReceiver"
+            android:exported="true">
             <intent-filter>
-                <action android:name="android.intent.action.TIME_SET"/>
+                <action android:name="android.intent.action.TIME_SET" />
             </intent-filter>
         </receiver>
 

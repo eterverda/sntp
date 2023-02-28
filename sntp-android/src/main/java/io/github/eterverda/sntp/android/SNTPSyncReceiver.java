@@ -3,7 +3,8 @@ package io.github.eterverda.sntp.android;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
 
 import io.github.eterverda.sntp.SNTP;
 import io.github.eterverda.sntp.cache.SNTPCache;
