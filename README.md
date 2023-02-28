@@ -17,7 +17,7 @@ In your `build.gradle`:
         maven { url 'https://raw.githubusercontent.com/eterverda/sntp/m2/' }
     }
     dependencies {
-        compile 'io.github.eterverda.sntp:sntp-android:0.1.5'
+        compile 'io.github.eterverda.sntp:sntp-android:0.2.0'
     }
 
 In `onCreate` of your application:
@@ -29,7 +29,10 @@ In `onCreate` of your application:
 
 In your `AndroidManifest.xml` add:
 
-    <receiver android:name="io.github.eterverda.sntp.android.SNTPResetCacheReceiver">
+    <receiver
+        android:name="io.github.eterverda.sntp.android.SNTPResetCacheReceiver"
+        android:exported="true">
+
         <intent-filter>
             <action android:name="android.intent.action.TIME_SET"/>
         </intent-filter>
@@ -48,14 +51,14 @@ In `build.gradle` of your Java project:
     }
 
     dependencies {
-        compile 'io.github.eterverda.sntp:sntp:0.1.5'
+        compile 'io.github.eterverda.sntp:sntp:0.2.0'
     }
 
 Somehere on startup of application:
 
     SNTP.init()
 
-... howewer this will not create persistent SNTP cache. If you need one replace `SNTP.init()` with:
+... however this will not create persistent SNTP cache. If you need one replace `SNTP.init()` with:
 
     SNTP.setClient(SNTPClientBuilder.create());
     SNTP.setCache(SNTPCacheBuilder.custom().setFile(sntpCacheFile).build());
