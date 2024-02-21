@@ -13,7 +13,7 @@ public final class SNTPHosts {
     public static final SNTPHosts RU = new SNTPHosts(true, "0.ru.pool.ntp.org", "1.ru.pool.ntp.org", "2.ru.pool.ntp.org", "3.ru.pool.ntp.org");
 
     private final String[] hosts;
-    private transient int index;
+    private volatile transient int index;
 
     public SNTPHosts(String host) {
         if (host == null) {
@@ -44,11 +44,10 @@ public final class SNTPHosts {
         index = (int) (Math.random() * hosts.length);
     }
 
+    @SuppressWarnings("NonAtomicOperationOnVolatileField")
     public String nextHost() {
-        if (index == hosts.length) {
-            index = 0;
-        }
-        return hosts[index++];
+        final int i = index++;
+        return hosts[Math.abs(i % hosts.length)];
     }
 
     @Override

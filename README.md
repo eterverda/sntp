@@ -51,7 +51,7 @@ In `build.gradle` of your Java project:
     }
 
     dependencies {
-        compile 'io.github.eterverda.sntp:sntp:0.2.0'
+        compile 'io.github.eterverda.sntp:sntp:0.2.1'
     }
 
 Somehere on startup of application:
