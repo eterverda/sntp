@@ -1,0 +1,110 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "io.github.eterverda.sntp",
+    "module": "sntp-android",
+    "version": "0.2.2",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.4.2"
+    }
+  },
+  "variants": [
+    {
+      "name": "releaseVariantReleaseApiPublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.eterverda.sntp",
+          "module": "sntp",
+          "version": {
+            "requires": "0.2.2"
+          }
+        },
+        {
+          "group": "androidx.annotation",
+          "module": "annotation",
+          "version": {
+            "requires": "1.6.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "sntp-android-0.2.2.aar",
+          "url": "sntp-android-0.2.2.aar",
+          "size": 5456,
+          "sha512": "8f6d4ea667515026e18f4b2d227935c91a55bf33b483be82b52fe9c5e2466ff408f793c3fe5f1722ddfce9d1119bf6618b64c82db601924a538be942e6391ad5",
+          "sha256": "d510cbe3750acb3001c2b57b53b1829756a1d508d9b8dc874829be555cfed7c4",
+          "sha1": "14f11e551e5ec9a4fb9a3396cc7d846d3b292163",
+          "md5": "40ad4422ce32c727ba824b8d11fa05df"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseRuntimePublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.eterverda.sntp",
+          "module": "sntp",
+          "version": {
+            "requires": "0.2.2"
+          }
+        },
+        {
+          "group": "androidx.annotation",
+          "module": "annotation",
+          "version": {
+            "requires": "1.6.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "sntp-android-0.2.2.aar",
+          "url": "sntp-android-0.2.2.aar",
+          "size": 5456,
+          "sha512": "8f6d4ea667515026e18f4b2d227935c91a55bf33b483be82b52fe9c5e2466ff408f793c3fe5f1722ddfce9d1119bf6618b64c82db601924a538be942e6391ad5",
+          "sha256": "d510cbe3750acb3001c2b57b53b1829756a1d508d9b8dc874829be555cfed7c4",
+          "sha1": "14f11e551e5ec9a4fb9a3396cc7d846d3b292163",
+          "md5": "40ad4422ce32c727ba824b8d11fa05df"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseSourcePublication",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "sntp-android-0.2.2-sources.jar",
+          "url": "sntp-android-0.2.2-sources.jar",
+          "size": 3979,
+          "sha512": "9faed83a3eb45c2ac02bd62f7cd9be80d09f63fbf752fb9c95c0323068200f7f31c99507dfe20bdb0695d5d40a7eedd303fb4176b17d7887f7a323172a1d3911",
+          "sha256": "00c07f5244e7069157e4105e5004b8149f8af98f693476bf6b714254b0d57d5b",
+          "sha1": "5c8dbb6648770ba4f95e0f06d7c26e159f59dbe2",
+          "md5": "b73fc00b12e4a39cd0cc83bd00f5267f"
+        }
+      ]
+    }
+  ]
+}
