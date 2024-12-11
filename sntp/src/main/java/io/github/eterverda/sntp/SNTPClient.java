@@ -45,8 +45,7 @@ public final class SNTPClient {
         final String host = hosts.nextHost();
         final InetAddress address = InetAddress.getByName(host);
 
-        final DatagramSocket socket = new DatagramSocket();
-        try {
+        try (DatagramSocket socket = new DatagramSocket()) {
             socket.setSoTimeout(timeout);
 
             socket.connect(address, NTP_PORT);
@@ -92,12 +91,6 @@ public final class SNTPClient {
             // For reasons unknown AssertionError thrown on some Android 4 devices.
             // Just coerce it to IOException.
             throw new IOException(ass);
-
-        } finally {
-            try {
-                socket.close();
-            } catch (Throwable ignore) {
-            }
         }
     }
 
