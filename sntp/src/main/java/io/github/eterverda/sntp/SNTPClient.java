@@ -87,6 +87,12 @@ public final class SNTPClient {
             }
             throw new UnknownHostException();
 
+        } catch (NullPointerException npe) {
+            if (npe.getMessage().equals("null buffer || null address")) {
+                throw new UnknownHostException();
+            }
+            throw npe;
+
         } catch (AssertionError ass) {
             // For reasons unknown AssertionError thrown on some Android 4 devices.
             // Just coerce it to IOException.
